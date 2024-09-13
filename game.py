@@ -1,21 +1,21 @@
-from typing import List, Any
+from typing import List, Any, Type
 
 from decision import Decision
-from renderer import ConsoleRenderer, FancyRenderer
+from renderer import Renderer
 from player import Player
 from board import Board
 
 
 class Game:
 
-    def __init__(self, renderer_type: Any[ConsoleRenderer | FancyRenderer]):
+    def __init__(self, renderer_type: Type[Renderer]):
         self.__game_board: Board = Board()
         self.__player1: Player = Player()
         self.__player2: Player = Player()
         self.__players: List[Player] = [self.__player1, self.__player2]
         self.__current_player_index: int = 0
 
-        self.__renderer: Any[ConsoleRenderer | FancyRenderer] = renderer_type
+        self.__renderer: Type[Renderer] = renderer_type
         # choosing rendered class
 
     def __assign_symbols_to_players(self):

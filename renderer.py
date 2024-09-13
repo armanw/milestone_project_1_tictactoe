@@ -1,9 +1,28 @@
 from board import Board
 from decision import Decision
 from tkinter import Tk, messagebox, Entry, Label, Button, Canvas, CENTER, mainloop
+import abc
 
 
-class ConsoleRenderer:
+class Renderer(abc.ABC):
+
+    @staticmethod
+    @abc.abstractmethod
+    def display_board(game_board: Board):
+        pass
+
+    @staticmethod
+    @abc.abstractmethod
+    def ask_question(question: Decision) -> str:
+        pass
+
+    @staticmethod
+    @abc.abstractmethod
+    def display_message(message: str):
+        pass
+
+
+class ConsoleRenderer(Renderer):
     @staticmethod
     def display_board(game_board: Board):
         # show Board object, no matter what it is
@@ -43,7 +62,7 @@ class ConsoleRenderer:
         print(message)
 
 
-class FancyRenderer:
+class FancyRenderer(Renderer):
     answer = ""
     root = None
     running = False
